@@ -32,11 +32,21 @@ public class RemoveDuplicatesFromSortedList {
 			while (temp != null && temp.val == cur.val) {
 				temp = temp.next;
 			}
-			
+
 			cur.next = temp;
 			cur = cur.next;
 		}
 
 		return head;
 	}
+
+	// super clean recursive solution
+	/*
+	private static ListNode _recursiveSolution(ListNode head) {
+		if (head == null || head.next == null) return head;
+		head.next = _recursiveSolution(head.next);
+		
+		return head.val == head.next.val ? head.next : head;
+	}
+	*/
 }
