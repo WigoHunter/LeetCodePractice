@@ -46,4 +46,35 @@ public class SearchForRange {
 		}
 		return -1;
 	}
+
+	// Start : Find first greater than or equal to target
+	// End: Then find first greater than or equal to target + 1
+	/*
+	private static int[] solution(int[] nums, int target) {
+		int start = firstGreaterEqual(nums, target);
+
+		if (start == nums.length || nums[start] != target) {
+			return new int[]{-1, -1};
+		}
+
+		return new int[]{start, firstGreaterEqual(nums, target + 1)};
+	}
+
+	private static int firstGreaterEqual(int[] nums, int target) {
+		int low = 0;
+		int high = nums.length;
+
+		while (low < high) {
+			int mid = low + ((high - low) >> 1);
+
+			if (nums[mid] < target) {
+				low = mid + 1;
+			} else {
+				high = mid;
+			}
+		}
+
+		return low;
+	}
+	*/
 }
