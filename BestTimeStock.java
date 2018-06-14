@@ -1,4 +1,3 @@
-// Cleaner solution available too. Check out SolutionOfDiameterOfBT
 import java.util.*;
 
 public class BestTimeStock {
@@ -8,7 +7,7 @@ public class BestTimeStock {
  
 	private static int maxProfit(int[] prices) {
 		if (prices.length == 0)	return 0;
-		
+
 		int curMaxProfit = 0;
 		int curPrice = prices[0];
 

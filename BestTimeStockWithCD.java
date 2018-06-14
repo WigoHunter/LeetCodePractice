@@ -1,4 +1,3 @@
-// Cleaner solution available too. Check out SolutionOfDiameterOfBT
 import java.util.*;
 
 public class BestTimeStockWithCD {
