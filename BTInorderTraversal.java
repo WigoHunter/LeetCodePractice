@@ -1,4 +1,3 @@
-// God-like solution - learnt from LeetCode
 import java.util.*;
 
 public class BTInorderTraversal {
