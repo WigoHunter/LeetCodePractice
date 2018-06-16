@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LongestUnivaluePath {
+public class BTZigzagLevelOrderTraversal {
 	private static class TreeNode {
 		int val;
 		TreeNode left;
@@ -14,12 +14,11 @@ public class LongestUnivaluePath {
 		root.right = new TreeNode(20);
 		root.right.left = new TreeNode(15);
 		root.right.right = new TreeNode(7);
-		root.right.right.right = new TreeNode(66);
 
-		System.out.println(Arrays.toString(btLevelOrderTraverse(root).toArray()));
+		System.out.println(Arrays.toString(zigzagLevelOrder(root).toArray()));
     }
  
-	private static List<List<Integer>> btLevelOrderTraverse(TreeNode root) {
+	private static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 		List<List<Integer>> res = new ArrayList<>();
 		Map<Integer, List<Integer>> levels = new HashMap<>();
 
@@ -36,12 +35,17 @@ public class LongestUnivaluePath {
 		if (root == null)	return;
 
 		List<Integer> list = levels.getOrDefault(level, new ArrayList<>());
-		list.add(root.val);
+		
+		if (level % 2 != 0) {
+			list.add(0, root.val);
+		} else {
+			list.add(list.size(), root.val);
+		}
+
 		levels.put(level, list);
 
 		if (root.left != null)
 			traverse(root.left, level + 1, levels);
-		
 		if (root.right != null)
 			traverse(root.right, level + 1, levels);
 	}
