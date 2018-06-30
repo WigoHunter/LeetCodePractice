@@ -2,7 +2,7 @@ import java.util.*;
 
 public class KClosestNumbers {
     public static void main(String[] args) {
-		System.out.println(Arrays.toString(findClosestElements(new int[]{1, 4, 5, 8}, 3, 19).toArray()));
+		System.out.println(Arrays.toString(findClosestElements(new int[]{1, 4, 6, 8}, 3, 3).toArray()));
 	}
 
 	private static List<Integer> findClosestElements(int[] arr, int k, int x) {
