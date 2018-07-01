@@ -2,7 +2,7 @@ import java.util.*;
 
 public class MountainSequence {
     public static void main(String[] args) {
-		System.out.println(mountainSequence(new int[]{ 10, 9, 8, 7 }));
+		System.out.println(mountainSequence(new int[]{ 1, 2, 3, 10 }));
 	}
 
 	private static int mountainSequence(int[] nums) {
