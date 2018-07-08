@@ -9,7 +9,7 @@ public class GenerateParentheses {
 	}
 	
 	private static List<String> generateParenthesis(int n) {
-		buildParentheses("", 3, 3, n);
+		buildParentheses("", n, n, n);
 		return res;
 	}
 
