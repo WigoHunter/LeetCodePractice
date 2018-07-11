@@ -2,8 +2,8 @@ import java.util.*;
 
 public class WordLadder {
    	public static void main(String[] args) {
-		List<String> list = new ArrayList<>(Arrays.asList("hot","dot","dog","log","lot", "cog"));
-		System.out.println(twoEndSolution("hit", "cog", list));
+		List<String> list = new ArrayList<>(Arrays.asList("hot","dot","dog","log","lot"));
+		// System.out.println(twoEndSolution("hit", "cog", list));
 		System.out.println(ladderLength("hit", "cog", list));
 	}
 	
@@ -54,37 +54,47 @@ public class WordLadder {
 		return 0;
 	}
  
-    private static int ladderLength(String beginWord, String endWord, List<String> wordList) {
-		if (!wordList.contains(endWord))	return 0;
-
-		int level = 0;
-		Queue<String> q = new LinkedList<>();
-		q.add(beginWord);
-
-		while (!q.isEmpty()) {
-			level++;
-
-			int curSize = q.size();
-			String curWord, nextWord;
-
-			for (int i = 0; i < curSize; i++) {
-				curWord = q.poll();
-				if (curWord.equals(endWord)) {
-					return level;
-				} else {
-					Iterator<String> it = wordList.iterator();
-					while (it.hasNext()) {
-						nextWord = it.next();
-						if (valid(curWord, nextWord)) {
-							it.remove();
-							q.add(nextWord);
-						}
-					}
-				}
-			}
-		}
-
-		return 0;
+    private static int ladderLength(String start, String end, List<String> dict) {
+        Queue<String> q = new LinkedList<>();
+        q.add(start);
+        int level = 0;
+        int loopSize;
+        
+        while (!q.isEmpty()) {
+            level++;
+            loopSize = q.size();
+            String curWord;
+            
+            for (int i = 0; i < loopSize; i++) {
+                curWord = q.poll();
+                
+                if (curWord.equals(end)) {
+                    return level;
+                } else {
+                    char[] chars = curWord.toCharArray();
+                    
+                    for (int j = 0; j < chars.length; j++) {
+                        char origin = chars[j];
+                        
+                        for (char c = 'a'; c <= 'z'; c++) {
+                            if (origin == c)    continue;
+                            chars[j] = c;
+                            String str = new String(chars);
+                            if (str.equals(end)) {
+                                return level + 1;
+                            } else if (dict.contains(str)) {
+                                q.add(str);
+                                dict.remove(str);
+                            }
+                        }
+                        
+                        chars[j] = origin;
+                    }
+                }
+            }
+        }
+        
+        return 0;
 	}
 
 	private static boolean valid(String s1, String s2) {
