@@ -24,6 +24,8 @@ public class Solution {
         res.add(new ArrayList<>(list));
         
         for (int i = start; i < nums.length; i++) {
+			if (i != start && nums[i] == nums[i - 1])	continue;
+			
             list.add(nums[i]);
             helper(nums, i + 1, list, res);
             list.remove(list.size() - 1);
