@@ -47,6 +47,6 @@ public class CourseScheduleIIP {
 			}
 		}
 
-		return res;
+		return index == numCourses ? res : new int[]{} ;
 	}
 }
