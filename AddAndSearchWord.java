@@ -36,34 +36,30 @@ public class AddAndSearchWord {
 		}
 
 		public boolean search(String word) {
-			int count = 0;
-			return search(word, root, count);
+			return search(word, root);
 		}
 
-		public boolean search(String word, TrieNode from, int count) {
-			TrieNode cur = from;
-			int i = 0;
-			
-			for (char c : word.toCharArray()) {
-				if (c != '.') {
-					if (cur.map.containsKey(c)) {
-						cur = cur.map.get(c);
-						count++;
-					} else {
-						return false;
-					}
-				} else {
-					for (char temp : cur.map.keySet()) {
-						if (search(word.substring(i + 1), cur.map.get(temp), 0)) {
-							return true;
-						}
+		public boolean search(String word, TrieNode root) {
+			if (word.length() == 0)	return root.end;
+			if (root.map.isEmpty()) return false;
+
+			char c = word.charAt(0);
+
+			if (c == '.') {
+				boolean found = false;
+				
+				for (TrieNode node : root.map.values()) {
+					if(search(word.substring(1), node)) {
+						found = true;
 					}
 				}
 
-				i++;
+				return found;
+			} else if (root.map.containsKey(c)) {
+				return search(word.substring(1), root.map.get(c));
 			}
 
-			return count == word.length() && cur.end;
+			return false;
 		}
 	}
 
