@@ -1,15 +1,17 @@
 import java.util.*;
 
-public class PrefixAndSuffixSearch {
-	private static class TrieNode {
-		Map<Character, TrieNode> map;
-		Integer weight;
-		TrieNode() {
-			map = new HashMap<>();
-		}
-	}
+public class PrefixSuffixSearch {
 
 	public static class WordFilter {
+		private static class TrieNode {
+			Map<Character, TrieNode> map;
+			int weight;
+			TrieNode() {
+				map = new HashMap<>();
+				weight = -1;
+			}
+		}
+
 		private TrieNode root;
 
 		public WordFilter(String[] words) {
@@ -27,28 +29,31 @@ public class PrefixAndSuffixSearch {
 				cur = cur.map.get(c);
 			}
 
-			return dfs(cur, suffix, 0);
+			StringBuilder branch = new StringBuilder(prefix);
+
+			return dfs(cur, suffix, branch);
 		}
 
-		private int dfs(TrieNode cur, String suffix, int count) {
-			if (cur.weight != null && count == suffix.length()) {
-				System.out.println("lol: " + cur.weight);
-				return cur.weight;
+		private static int dfs(TrieNode root, String suffix, StringBuilder branch) {
+			if (root == null) {
+				return -1;
 			}
 
-			for (Map.Entry<Character, TrieNode> e : cur.map.entrySet()) {
-				System.out.println("suffix: " + suffix);
-				System.out.println("index: " + count);
-				System.out.println("key: " + e.getKey());
-				System.out.println();
-				if (e.getKey() == suffix.charAt(count)) {
-					return dfs(e.getValue(), suffix, count + 1);
-				}
-
-				return dfs(e.getValue(), suffix, count);
+			if (root.weight >= 0 && branch.toString().endsWith(suffix)) {
+				return root.weight;
 			}
 
-			return -1;
+			int max = -1;
+
+			for (Map.Entry<Character, TrieNode> e : root.map.entrySet()) {
+				char c = e.getKey();
+				branch.append(c);
+				int l = branch.length();
+				max = Math.max(max, dfs(e.getValue(), suffix, branch));
+				branch.setLength(l - 1);
+			}
+
+			return max;
 		}
 
 		private TrieNode buildTrie(String[] words) {
