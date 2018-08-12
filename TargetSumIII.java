@@ -6,17 +6,17 @@ public class TargetSumIII {
     }
 
     private static int findTargetSumWays(int[] nums, int S) {
-        return dfs(nums, 0, 0, 1, S) + dfs(nums, 0, 0, -1, S);
+        return dfs(nums, 0, 0, S);
     }
 
-    private static int dfs(int[] nums, int index, int cur, int negative, int S) {
-		if (index == nums.length - 1) {
-			if (cur + negative * nums[index] == S)
+    private static int dfs(int[] nums, int index, int cur, int S) {
+		if (index == nums.length) {
+			if (cur == S)
 				return 1;
 			else
 				return 0;
 		}
 
-		return dfs(nums, index + 1, cur + negative * nums[index], 1, S) + dfs(nums, index + 1, cur + negative * nums[index], -1, S);
+		return dfs(nums, index + 1, cur + nums[index], S) + dfs(nums, index + 1, cur - nums[index], S);
     }
 }
