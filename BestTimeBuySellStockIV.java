@@ -17,7 +17,6 @@ public class BestTimeBuySellStockIV {
         
         for (int i = 1; i < prices.length; i++) {
 			state[0] = Math.max(state[0], -prices[i]);
-			System.out.println(state[0]);
 			
             for (int j = 1; j < allows; j++) {
                 if (j % 2 == 1) {
